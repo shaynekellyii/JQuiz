@@ -9,7 +9,7 @@ import javax.inject.Inject
  * Observable ViewModel for displaying the list of clues.
  * @constructor Initializes the data status and fetches data from the repository.
  */
-class ClueListViewModel : BaseViewModel() {
+class CluesViewModel : BaseViewModel() {
 
     @Inject
     lateinit var repository: AppRepository

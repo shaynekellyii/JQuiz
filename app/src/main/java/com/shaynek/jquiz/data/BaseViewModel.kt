@@ -18,7 +18,7 @@ open class BaseViewModel : ViewModel() {
 
     private fun inject() {
         when (this) {
-            is ClueListViewModel -> injector.inject(this)
+            is CluesViewModel -> injector.inject(this)
         }
     }
 }

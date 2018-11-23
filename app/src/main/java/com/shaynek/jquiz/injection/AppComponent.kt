@@ -1,7 +1,7 @@
 package com.shaynek.jquiz.injection
 
 import com.shaynek.jquiz.data.AppRepository
-import com.shaynek.jquiz.data.ClueListViewModel
+import com.shaynek.jquiz.data.CluesViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -10,7 +10,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(repository: AppRepository)
-    fun inject(viewModel: ClueListViewModel)
+    fun inject(viewModel: CluesViewModel)
 
     @Component.Builder
     interface Builder {
