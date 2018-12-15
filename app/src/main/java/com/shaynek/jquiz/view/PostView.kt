@@ -21,6 +21,7 @@ class PostView : ConstraintLayout {
             post_title_text.text = title
             post_author_text.text = resources.getString(R.string.by, author)
             post_self_text.text = if (selftext.isNotEmpty()) selftext else "No self text"
+            post_subreddit_text.text = subreddit
         }
     }
 }

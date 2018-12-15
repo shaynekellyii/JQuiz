@@ -12,5 +12,7 @@ data class RedditPostData(
     val permalink: String,
     val url: String,
     val num_comments: Int,
-    val created: Long
+    val created: Long,
+    val is_self: Boolean,
+    val post_hint: String
 )

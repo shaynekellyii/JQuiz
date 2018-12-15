@@ -57,11 +57,28 @@
             android:layout_marginBottom="@dimen/grid_space_double"
             android:maxLines="1"
             android:ellipsize="end"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/post_left_guideline"
             app:layout_constraintEnd_toEndOf="@id/post_right_guideline"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintTop_toBottomOf="@id/post_self_text"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="by exampleuser"/>
+
+    <TextView
+            android:id="@+id/post_subreddit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_space_double"
+            android:layout_marginBottom="@dimen/grid_space_double"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/post_left_guideline"
+            app:layout_constraintEnd_toEndOf="@id/post_right_guideline"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintTop_toBottomOf="@id/post_self_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="subreddit"/>
 
 </com.shaynek.jquiz.view.PostView>
