@@ -1,7 +1,7 @@
 package com.shaynek.jquiz.data
 
-import com.shaynek.jquiz.model.Clue
-import com.shaynek.jquiz.network.JServiceApi
+import com.shaynek.jquiz.model.RedditResponse
+import com.shaynek.jquiz.network.RedditApi
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -10,13 +10,13 @@ import javax.inject.Inject
 class AppRepository : BaseRepository() {
 
     @Inject
-    lateinit var jServiceApi: JServiceApi
+    lateinit var redditApi: RedditApi
 
     /**
-     * Fetches clues from the jService API and returns an observable.
+     * Fetches top posts from the reddit API and returns an observable.
      * @return observable from the API call
      */
-    fun fetchClues(): Observable<List<Clue>> = jServiceApi.getClues()
+    fun fetchPosts(): Observable<RedditResponse> = redditApi.getTop(null, 10)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 }

@@ -1,7 +1,7 @@
 package com.shaynek.jquiz.injection
 
 import com.shaynek.jquiz.data.AppRepository
-import com.shaynek.jquiz.network.JServiceApi
+import com.shaynek.jquiz.network.RedditApi
 import com.shaynek.jquiz.util.API_BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -17,8 +17,8 @@ object AppModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideApi(retrofit: Retrofit): JServiceApi {
-        return retrofit.create(JServiceApi::class.java)
+    internal fun provideApi(retrofit: Retrofit): RedditApi {
+        return retrofit.create(RedditApi::class.java)
     }
 
     @Provides
