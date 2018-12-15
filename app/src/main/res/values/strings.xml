@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">jQuiz</string>
+    <string name="app_name">readit</string>
+
+    <string name="by">by %1$s</string>
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shaynek.jquiz.data.PostsViewModel
 import com.shaynek.jquiz.view.PostsAdapter
@@ -23,7 +24,10 @@ class PostsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(view)
 
-        posts_recyclerview.layoutManager = LinearLayoutManager(this)
+        with (posts_recyclerview) {
+            layoutManager = LinearLayoutManager(this@PostsActivity)
+            addItemDecoration(DividerItemDecoration(this@PostsActivity, DividerItemDecoration.VERTICAL))
+        }
 
         viewModel.dataStatus.observe(this, Observer { })
         viewModel.posts.observe(this, Observer {
