@@ -11,17 +11,12 @@ import com.shaynek.jquiz.model.RedditPostData
 class PostsAdapter(private val posts: List<RedditPostData>) : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder =
-        PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.post_item, parent, false))
+        PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_post, parent, false) as PostView)
 
-    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.title.text = posts[position].title
-        holder.author.text = posts[position].author
-    }
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) =
+        (holder.itemView as PostView).setModel(posts[position])
 
     override fun getItemCount(): Int = posts.size
 
-    class PostViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.post_item_title)
-        val author: TextView = view.findViewById(R.id.post_item_author)
-    }
+    class PostViewHolder(view: PostView) : RecyclerView.ViewHolder(view)
 }

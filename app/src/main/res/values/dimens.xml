@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Basic -->
+    <dimen name="grid_space">8dp</dimen>
+    <dimen name="grid_space_double">16dp</dimen>
+
+    <!-- Post view -->
+    <dimen name="post_title_text">16sp</dimen>
+</resources>
