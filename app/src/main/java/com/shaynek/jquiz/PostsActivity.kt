@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.shaynek.jquiz.data.PostsViewModel
+import com.shaynek.jquiz.view.PostsAdapter
 import kotlinx.android.synthetic.main.activity_posts.*
 
 
@@ -21,7 +23,11 @@ class PostsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(view)
 
-        viewModel.dataStatus.observe(this,
-            Observer { status -> main_textview.text = status.toString() })
+        posts_recyclerview.layoutManager = LinearLayoutManager(this)
+
+        viewModel.dataStatus.observe(this, Observer { })
+        viewModel.posts.observe(this, Observer {
+            posts_recyclerview.adapter = PostsAdapter(it)
+        })
     }
 }

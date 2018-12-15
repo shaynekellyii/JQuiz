@@ -1,6 +1,7 @@
 package com.shaynek.jquiz.data
 
 import androidx.lifecycle.MutableLiveData
+import com.shaynek.jquiz.model.RedditPostData
 import com.shaynek.jquiz.model.RedditResponse
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -14,7 +15,7 @@ class PostsViewModel : BaseViewModel() {
     @Inject
     lateinit var repository: AppRepository
 
-//    val clues: MutableLiveData<List<Clue>> = MutableLiveData()
+    val posts: MutableLiveData<List<RedditPostData>> = MutableLiveData()
     val dataStatus: MutableLiveData<DataStatus> = MutableLiveData()
 
     private val disposable: CompositeDisposable = CompositeDisposable()
@@ -35,7 +36,7 @@ class PostsViewModel : BaseViewModel() {
     }
 
     private fun onCluesFetched(response: RedditResponse?) {
-//        clues.postValue(fetchedClues)
+        posts.postValue(response?.data?.children?.map { it.data })
         dataStatus.postValue(DataStatus.SUCCESS)
     }
 
