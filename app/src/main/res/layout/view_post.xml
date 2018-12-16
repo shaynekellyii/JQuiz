@@ -132,43 +132,72 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="post_author_text,post_subreddit_text"/>
 
+    <View
+            android:id="@+id/post_arrow_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/ic_arrow_up"
+            android:backgroundTint="@android:color/tab_indicator_text"
+            app:layout_constraintStart_toStartOf="@id/post_left_guideline"
+            app:layout_constraintTop_toTopOf="@id/post_score_text"
+            app:layout_constraintBottom_toBottomOf="@id/post_score_text"/>
+
     <TextView
             android:id="@+id/post_score_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/grid_space"
             android:layout_marginBottom="@dimen/grid_space_double"
-            android:drawableStart="@drawable/ic_arrow_up"
             android:gravity="center_vertical"
-            app:layout_constraintStart_toStartOf="@id/post_left_guideline"
+            app:layout_constraintStart_toEndOf="@id/post_arrow_icon"
             app:layout_constraintTop_toBottomOf="@id/subreddit_author_barrier"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="7.7K"/>
+
+    <View
+            android:id="@+id/post_comment_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:background="@drawable/ic_comment"
+            android:backgroundTint="@android:color/tab_indicator_text"
+            android:layout_marginStart="@dimen/grid_space"
+            app:layout_constraintStart_toEndOf="@id/post_score_text"
+            app:layout_constraintTop_toTopOf="@id/post_score_text"
+            app:layout_constraintBottom_toBottomOf="@id/post_score_text"/>
 
     <TextView
             android:id="@+id/post_comment_count_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/grid_space"
             android:layout_marginTop="@dimen/grid_space"
             android:layout_marginBottom="@dimen/grid_space_double"
-            android:drawableStart="@drawable/ic_comment"
+            android:layout_marginStart="4dp"
             android:gravity="center_vertical"
-            app:layout_constraintStart_toEndOf="@id/post_score_text"
+            app:layout_constraintStart_toEndOf="@id/post_comment_icon"
             app:layout_constraintTop_toBottomOf="@id/subreddit_author_barrier"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="140"/>
+
+    <View
+            android:id="@+id/post_time_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/ic_time"
+            android:backgroundTint="@android:color/tab_indicator_text"
+            android:layout_marginStart="@dimen/grid_space"
+            app:layout_constraintStart_toEndOf="@id/post_comment_count_text"
+            app:layout_constraintTop_toTopOf="@id/post_score_text"
+            app:layout_constraintBottom_toBottomOf="@id/post_score_text"/>
 
     <TextView
             android:id="@+id/post_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/grid_space"
             android:layout_marginTop="@dimen/grid_space"
             android:layout_marginBottom="@dimen/grid_space_double"
-            android:drawableStart="@drawable/ic_time"
+            android:layout_marginStart="4dp"
             android:gravity="center_vertical"
-            app:layout_constraintStart_toEndOf="@id/post_comment_count_text"
+            app:layout_constraintStart_toEndOf="@id/post_time_icon"
             app:layout_constraintTop_toBottomOf="@id/subreddit_author_barrier"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="5h"/>
