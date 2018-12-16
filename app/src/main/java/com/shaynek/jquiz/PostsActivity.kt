@@ -46,7 +46,11 @@ class PostsActivity : AppCompatActivity() {
     private fun onPostsLoaded(posts: List<RedditPostData>) {
         val sizeProvider = ViewPreloadSizeProvider<Any>()
         val modelProvider = MyPreloadModelProvider(posts.map {
-            when (it.post_hint) { "image" -> it.url else -> "" }
+            when {
+                it.post_hint == "image" -> it.url
+                !it.is_self -> it.thumbnail
+                else -> ""
+            }
         }, this)
         val preloader = RecyclerViewPreloader(
             GlideApp.with(this), modelProvider, sizeProvider, MAX_PRELOAD_IMAGES)

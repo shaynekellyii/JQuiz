@@ -60,11 +60,36 @@
             app:layout_constraintTop_toBottomOf="@id/post_title_text"
             tools:background="@tools:sample/backgrounds/scenic"/>
 
+    <ImageView
+            android:id="@+id/post_thumbnail"
+            android:layout_height="84dp"
+            android:layout_width="84dp"
+            android:layout_marginTop="@dimen/grid_space_double"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_title_text"/>
+
+    <TextView
+            android:id="@+id/post_link_text"
+            android:layout_width="0dp"
+            android:layout_height="84dp"
+            android:textColor="@android:color/black"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/grid_space_double"
+            android:paddingEnd="@dimen/grid_space_double"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:background="@color/grey_300"
+            app:layout_constraintStart_toEndOf="@id/post_thumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/post_thumbnail"
+            tools:text="http://url.com/url"/>
+
     <androidx.constraintlayout.widget.Barrier
             android:id="@+id/post_content_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="post_self_text,post_image"
+            app:constraint_referenced_ids="post_self_text,post_image,post_thumbnail"
             app:barrierDirection="bottom"/>
 
     <TextView

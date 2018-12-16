@@ -17,16 +17,30 @@ class PostsAdapter(private val posts: List<RedditPostData>) : RecyclerView.Adapt
         PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_post, parent, false) as PostView)
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        with (holder) {
+        with(holder) {
             (itemView as PostView).setModel(posts[position])
-            if (posts[position].post_hint == "image") {
-                Glide.with(itemView.context)
-                    .load(posts[position].url)
-                    .into(imageView)
-            } else {
-                Glide.with(itemView.context)
-                    .clear(imageView)
-                imageView.setImageDrawable(null)
+            when {
+                posts[position].post_hint == "image" -> {
+                    Glide.with(itemView.context)
+                        .load(posts[position].url)
+                        .into(imageView)
+                    Glide.with(itemView.context)
+                        .clear(thumbnailImageView)
+                    thumbnailImageView.setImageDrawable(null)
+                }
+                !posts[position].is_self -> {
+                    Glide.with(itemView.context)
+                        .load(posts[position].thumbnail)
+                        .into(thumbnailImageView)
+                    Glide.with(itemView.context)
+                        .clear(imageView)
+                    imageView.setImageDrawable(null)
+                }
+                else -> {
+                    Glide.with(itemView.context)
+                        .clear(imageView)
+                    imageView.setImageDrawable(null)
+                }
             }
         }
     }
@@ -35,5 +49,6 @@ class PostsAdapter(private val posts: List<RedditPostData>) : RecyclerView.Adapt
 
     class PostViewHolder(view: PostView) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.post_image)
+        val thumbnailImageView: ImageView = view.findViewById(R.id.post_thumbnail)
     }
 }

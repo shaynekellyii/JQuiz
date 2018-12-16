@@ -22,18 +22,28 @@ class PostView : ConstraintLayout {
             post_title_text.text = title
             post_author_text.text = resources.getString(R.string.by, author)
             post_subreddit_text.text = subreddit
+            post_link_text.text = url
 
             when {
                 is_self -> {
                     post_self_text.text = selftext
                     post_self_text.visibility = View.VISIBLE
                     post_image.visibility = View.GONE
+                    post_thumbnail.visibility = View.GONE
+                    post_link_text.visibility = View.GONE
                 }
                 post_hint == "image" -> {
                     post_self_text.visibility = View.GONE
                     post_image.visibility = View.VISIBLE
+                    post_thumbnail.visibility = View.GONE
+                    post_link_text.visibility = View.GONE
                 }
-                else -> {}
+                else -> {
+                    post_self_text.visibility = View.GONE
+                    post_image.visibility = View.GONE
+                    post_thumbnail.visibility = View.VISIBLE
+                    post_link_text.visibility = View.VISIBLE
+                }
             }
         }
     }
