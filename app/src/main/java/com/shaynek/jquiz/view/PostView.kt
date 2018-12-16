@@ -6,6 +6,8 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.shaynek.jquiz.R
 import com.shaynek.jquiz.model.RedditPostData
+import com.shaynek.jquiz.util.shortNumString
+import com.shaynek.jquiz.util.timeSinceNow
 import kotlinx.android.synthetic.main.view_post.view.*
 
 class PostView : ConstraintLayout {
@@ -23,6 +25,9 @@ class PostView : ConstraintLayout {
             post_author_text.text = resources.getString(R.string.by, author)
             post_subreddit_text.text = subreddit
             post_link_text.text = url
+            post_score_text.text = score.shortNumString()
+            post_comment_count_text.text = num_comments.shortNumString()
+            post_time_text.text = created_utc.timeSinceNow()
 
             when {
                 is_self -> {

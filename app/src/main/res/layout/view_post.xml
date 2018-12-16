@@ -20,6 +20,7 @@
             app:layout_constraintGuide_end="@dimen/grid_space_double"
             android:orientation="vertical"/>
 
+    <!-- Header area -->
     <TextView
             android:id="@+id/post_title_text"
             android:layout_width="0dp"
@@ -36,6 +37,7 @@
             app:layout_constraintHorizontal_bias="0"
             />
 
+    <!-- Content section -->
     <TextView
             android:id="@+id/post_self_text"
             android:layout_width="0dp"
@@ -92,12 +94,12 @@
             app:constraint_referenced_ids="post_self_text,post_image,post_thumbnail"
             app:barrierDirection="bottom"/>
 
+    <!-- Subreddit/author section -->
     <TextView
             android:id="@+id/post_author_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/grid_space_double"
-            android:layout_marginBottom="@dimen/grid_space_double"
             android:maxLines="1"
             android:ellipsize="end"
             android:visibility="gone"
@@ -113,7 +115,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/grid_space_double"
-            android:layout_marginBottom="@dimen/grid_space_double"
             android:maxLines="1"
             android:ellipsize="end"
             android:textStyle="bold"
@@ -121,7 +122,55 @@
             app:layout_constraintEnd_toEndOf="@id/post_right_guideline"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintTop_toBottomOf="@id/post_content_barrier"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="subreddit"/>
+
+    <!-- Post info section -->
+    <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/subreddit_author_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="post_author_text,post_subreddit_text"/>
+
+    <TextView
+            android:id="@+id/post_score_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_space"
+            android:layout_marginBottom="@dimen/grid_space_double"
+            android:drawableStart="@drawable/ic_arrow_up"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="@id/post_left_guideline"
+            app:layout_constraintTop_toBottomOf="@id/subreddit_author_barrier"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="7.7K"/>
+
+    <TextView
+            android:id="@+id/post_comment_count_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/grid_space"
+            android:layout_marginTop="@dimen/grid_space"
+            android:layout_marginBottom="@dimen/grid_space_double"
+            android:drawableStart="@drawable/ic_comment"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toEndOf="@id/post_score_text"
+            app:layout_constraintTop_toBottomOf="@id/subreddit_author_barrier"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="140"/>
+
+    <TextView
+            android:id="@+id/post_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/grid_space"
+            android:layout_marginTop="@dimen/grid_space"
+            android:layout_marginBottom="@dimen/grid_space_double"
+            android:drawableStart="@drawable/ic_time"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toEndOf="@id/post_comment_count_text"
+            app:layout_constraintTop_toBottomOf="@id/subreddit_author_barrier"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="5h"/>
 
 </com.shaynek.jquiz.view.PostView>
