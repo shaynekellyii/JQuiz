@@ -32,7 +32,7 @@ class PostView : ConstraintLayout {
             when {
                 is_self -> {
                     post_self_text.text = selftext
-                    post_self_text.visibility = View.VISIBLE
+                    post_self_text.visibility = if (selftext.isNotEmpty()) View.VISIBLE else View.GONE
                     post_image.visibility = View.GONE
                     post_thumbnail.visibility = View.GONE
                     post_link_text.visibility = View.GONE

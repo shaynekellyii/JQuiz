@@ -12,4 +12,10 @@ interface RedditApi {
         @Query("after") after: String?,
         @Query("limit") limit: Int
     ): Observable<RedditResponse>
+
+    @GET("/hot.json")
+    fun getHot(
+        @Query("after") after: String?,
+        @Query("limit") limit: Int
+    ): Observable<RedditResponse>
 }

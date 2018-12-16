@@ -2,6 +2,7 @@ package com.shaynek.jquiz.data
 
 import com.shaynek.jquiz.model.RedditResponse
 import com.shaynek.jquiz.network.RedditApi
+import com.shaynek.jquiz.util.POSTS_PER_PAGE
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +17,7 @@ class AppRepository : BaseRepository() {
      * Fetches top posts from the reddit API and returns an observable.
      * @return observable from the API call
      */
-    fun fetchPosts(): Observable<RedditResponse> = redditApi.getTop(null, 10)
+    fun fetchPosts(): Observable<RedditResponse> = redditApi.getHot(null, POSTS_PER_PAGE)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 }
