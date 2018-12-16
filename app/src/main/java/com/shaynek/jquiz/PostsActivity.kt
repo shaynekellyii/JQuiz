@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +14,7 @@ import com.bumptech.glide.ListPreloader.PreloadModelProvider
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
+import com.shaynek.jquiz.data.DataStatus
 import com.shaynek.jquiz.data.PostsViewModel
 import com.shaynek.jquiz.injection.GlideApp
 import com.shaynek.jquiz.model.RedditPostData
@@ -39,7 +41,9 @@ class PostsActivity : AppCompatActivity() {
             addItemDecoration(DividerItemDecoration(this@PostsActivity, DividerItemDecoration.VERTICAL))
         }
 
-        viewModel.dataStatus.observe(this, Observer {  })
+        viewModel.dataStatus.observe(this, Observer {
+            posts_activity_progressbar.visibility = if (it == DataStatus.LOADING) View.VISIBLE else View.GONE
+        })
         viewModel.posts.observe(this, Observer { onPostsLoaded(it) })
     }
 
