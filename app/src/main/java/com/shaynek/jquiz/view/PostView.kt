@@ -2,6 +2,7 @@ package com.shaynek.jquiz.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.shaynek.jquiz.R
 import com.shaynek.jquiz.model.RedditPostData
@@ -20,8 +21,20 @@ class PostView : ConstraintLayout {
         with (model) {
             post_title_text.text = title
             post_author_text.text = resources.getString(R.string.by, author)
-            post_self_text.text = if (selftext.isNotEmpty()) selftext else "No self text"
             post_subreddit_text.text = subreddit
+
+            when {
+                is_self -> {
+                    post_self_text.text = selftext
+                    post_self_text.visibility = View.VISIBLE
+                    post_image.visibility = View.GONE
+                }
+                post_hint == "image" -> {
+                    post_self_text.visibility = View.GONE
+                    post_image.visibility = View.VISIBLE
+                }
+                else -> {}
+            }
         }
     }
 }
