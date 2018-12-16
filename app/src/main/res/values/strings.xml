@@ -2,4 +2,11 @@
     <string name="app_name">readit</string>
 
     <string name="by">by %1$s</string>
+
+    <string name="hot">Hot</string>
+    <string name="top">Top</string>
+    <string name="best">Best</string>
+    <string name="new_string">New</string>
+    <string name="rising">Rising</string>
+    <string name="controversial">Controversial</string>
 </resources>

@@ -11,7 +11,9 @@ import com.shaynek.jquiz.R
 import com.shaynek.jquiz.injection.GlideApp
 import com.shaynek.jquiz.model.RedditPostData
 
-class PostsAdapter(private val posts: List<RedditPostData>) : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
+class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
+
+    lateinit var posts: List<RedditPostData>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder =
         PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_post, parent, false) as PostView)
