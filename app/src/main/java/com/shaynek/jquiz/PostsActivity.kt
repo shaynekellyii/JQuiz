@@ -21,6 +21,7 @@ import com.shaynek.jquiz.data.PostsViewModel
 import com.shaynek.jquiz.enums.Sort
 import com.shaynek.jquiz.injection.GlideApp
 import com.shaynek.jquiz.model.RedditPostData
+import com.shaynek.jquiz.network.GlidePreloadModelProvider
 import com.shaynek.jquiz.util.MAX_PRELOAD_IMAGES
 import com.shaynek.jquiz.view.PostsAdapter
 import kotlinx.android.synthetic.main.activity_posts.*
@@ -70,7 +71,7 @@ class PostsActivity : AppCompatActivity() {
 
     private fun onPostsLoaded(posts: List<RedditPostData>) {
         val sizeProvider = ViewPreloadSizeProvider<Any>()
-        val modelProvider = MyPreloadModelProvider(posts.map {
+        val modelProvider = GlidePreloadModelProvider(posts.map {
             when {
                 it.post_hint == "image" -> it.url
                 !it.is_self -> it.thumbnail
@@ -85,17 +86,5 @@ class PostsActivity : AppCompatActivity() {
             recyclerAdapter.notifyDataSetChanged()
             addOnScrollListener(preloader)
         }
-    }
-
-    private inner class MyPreloadModelProvider(val urls: List<String>, val context: Context) :
-        PreloadModelProvider<Any> {
-
-        override fun getPreloadItems(position: Int): List<Any> {
-            val url = urls[position]
-            return if (TextUtils.isEmpty(url)) Collections.emptyList() else Collections.singletonList(url)
-        }
-
-        override fun getPreloadRequestBuilder(item: Any): RequestBuilder<*>? =
-            GlideApp.with(context).load(item)
     }
 }
