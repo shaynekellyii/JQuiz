@@ -18,7 +18,7 @@ import com.shaynek.jquiz.injection.GlideApp
 import com.shaynek.jquiz.model.RedditPostData
 import com.shaynek.jquiz.network.GlidePreloadModelProvider
 import com.shaynek.jquiz.util.MAX_PRELOAD_IMAGES
-import kotlinx.android.synthetic.main.activity_posts.*
+import kotlinx.android.synthetic.main.activity_feed.*
 import javax.inject.Inject
 
 class FeedActivity : BaseActivity() {
@@ -41,7 +41,7 @@ class FeedActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_posts)
+        setContentView(R.layout.activity_feed)
 
         injector.inject(this)
         feed_view.init()

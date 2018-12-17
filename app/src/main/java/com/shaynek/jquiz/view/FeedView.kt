@@ -3,14 +3,14 @@ package com.shaynek.jquiz.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.shaynek.jquiz.model.RedditPostData
-import kotlinx.android.synthetic.main.activity_posts.view.*
+import kotlinx.android.synthetic.main.activity_feed.view.*
 
-class FeedView : ConstraintLayout {
+class FeedView : CoordinatorLayout {
 
     private val recyclerAdapter by lazy { FeedAdapter() }
 
