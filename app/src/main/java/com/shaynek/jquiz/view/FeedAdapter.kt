@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.shaynek.jquiz.R
 import com.shaynek.jquiz.model.RedditPostData
 
-class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
+class FeedAdapter : RecyclerView.Adapter<FeedAdapter.PostViewHolder>() {
 
     lateinit var posts: List<RedditPostData>
 

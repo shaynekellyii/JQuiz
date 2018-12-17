@@ -13,7 +13,7 @@ import javax.inject.Inject
  * Observable ViewModel for displaying the list of posts.
  * @constructor Initializes the data status and fetches data from the repository.
  */
-class PostListViewModel(private val repository: AppRepository) : ViewModel() {
+class FeedViewModel(private val repository: AppRepository) : ViewModel() {
 
     val posts: MutableLiveData<List<RedditPostData>> = MutableLiveData()
     val dataStatus: MutableLiveData<DataStatus> = MutableLiveData()

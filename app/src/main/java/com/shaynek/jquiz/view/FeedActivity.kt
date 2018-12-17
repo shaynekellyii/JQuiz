@@ -13,7 +13,7 @@ import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.shaynek.jquiz.R
 import com.shaynek.jquiz.data.AppRepository
 import com.shaynek.jquiz.data.DataStatus
-import com.shaynek.jquiz.data.PostListViewModel
+import com.shaynek.jquiz.data.FeedViewModel
 import com.shaynek.jquiz.enums.Sort
 import com.shaynek.jquiz.injection.AppModule
 import com.shaynek.jquiz.injection.DaggerAppComponent
@@ -24,13 +24,13 @@ import com.shaynek.jquiz.util.MAX_PRELOAD_IMAGES
 import kotlinx.android.synthetic.main.activity_posts.*
 import javax.inject.Inject
 
-class PostListActivity : BaseActivity() {
+class FeedActivity : BaseActivity() {
 
     @Inject
     lateinit var repository: AppRepository
 
-    private val viewModel: PostListViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory { PostListViewModel(repository) }).get(PostListViewModel::class.java)
+    private val viewModel: FeedViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory { FeedViewModel(repository) }).get(FeedViewModel::class.java)
     }
 
     private val injector by lazy {
@@ -40,7 +40,7 @@ class PostListActivity : BaseActivity() {
             .build()
     }
 
-    private val recyclerAdapter by lazy { PostListAdapter() }
+    private val recyclerAdapter by lazy { FeedAdapter() }
 
     private var currentSort = Sort.HOT
 
@@ -51,8 +51,8 @@ class PostListActivity : BaseActivity() {
         injector.inject(this)
 
         with(posts_recyclerview) {
-            layoutManager = LinearLayoutManager(this@PostListActivity)
-            addItemDecoration(DividerItemDecoration(this@PostListActivity, DividerItemDecoration.VERTICAL))
+            layoutManager = LinearLayoutManager(this@FeedActivity)
+            addItemDecoration(DividerItemDecoration(this@FeedActivity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
         }
 
