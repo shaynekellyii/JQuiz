@@ -3,11 +3,8 @@ package com.shaynek.jquiz.view
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.shaynek.jquiz.R
@@ -40,8 +37,6 @@ class FeedActivity : BaseActivity() {
             .build()
     }
 
-    private val recyclerAdapter by lazy { FeedAdapter() }
-
     private var currentSort = Sort.HOT
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,16 +44,10 @@ class FeedActivity : BaseActivity() {
         setContentView(R.layout.activity_posts)
 
         injector.inject(this)
-
-        with(posts_recyclerview) {
-            layoutManager = LinearLayoutManager(this@FeedActivity)
-            addItemDecoration(DividerItemDecoration(this@FeedActivity, DividerItemDecoration.VERTICAL))
-            setHasFixedSize(true)
-        }
+        feed_view.init()
 
         viewModel.dataStatus.observe(this, Observer {
-            posts_activity_progressbar.visibility = if (it == DataStatus.LOADING) View.VISIBLE else View.GONE
-            posts_recyclerview.visibility = if (it == DataStatus.LOADING) View.GONE else View.VISIBLE
+            if (it == DataStatus.LOADING) feed_view.showLoading() else feed_view.hideLoading()
         })
         viewModel.posts.observe(this, Observer { onPostsLoaded(it) })
     }
@@ -69,8 +58,8 @@ class FeedActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        item?.itemId.let {
-            if (it != currentSort.menuId) viewModel.onSortSelected(Sort.fromMenuId(it!!))
+        item?.itemId?.let {
+            if (it != currentSort.menuId) viewModel.onSortSelected(Sort.fromMenuId(it))
         }
         return super.onOptionsItemSelected(item)
     }
@@ -86,11 +75,6 @@ class FeedActivity : BaseActivity() {
         }, this)
         val preloader = RecyclerViewPreloader(GlideApp.with(this), modelProvider, sizeProvider, MAX_PRELOAD_IMAGES)
 
-        with(posts_recyclerview) {
-            recyclerAdapter.posts = posts
-            adapter = recyclerAdapter
-            recyclerAdapter.notifyDataSetChanged()
-            addOnScrollListener(preloader)
-        }
+        feed_view.setPosts(posts, preloader)
     }
 }
