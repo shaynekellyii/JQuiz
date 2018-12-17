@@ -45,6 +45,8 @@ class FeedActivity : BaseActivity() {
 
         injector.inject(this)
         feed_view.init()
+        setSupportActionBar(feed_toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         viewModel.dataStatus.observe(this, Observer {
             if (it == DataStatus.LOADING) feed_view.showLoading() else feed_view.hideLoading()
