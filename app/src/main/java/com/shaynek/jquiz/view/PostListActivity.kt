@@ -1,11 +1,9 @@
 package com.shaynek.jquiz.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,9 +13,8 @@ import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.shaynek.jquiz.R
 import com.shaynek.jquiz.data.AppRepository
 import com.shaynek.jquiz.data.DataStatus
-import com.shaynek.jquiz.data.PostsViewModel
+import com.shaynek.jquiz.data.PostListViewModel
 import com.shaynek.jquiz.enums.Sort
-import com.shaynek.jquiz.injection.AppComponent
 import com.shaynek.jquiz.injection.AppModule
 import com.shaynek.jquiz.injection.DaggerAppComponent
 import com.shaynek.jquiz.injection.GlideApp
@@ -27,16 +24,13 @@ import com.shaynek.jquiz.util.MAX_PRELOAD_IMAGES
 import kotlinx.android.synthetic.main.activity_posts.*
 import javax.inject.Inject
 
-class PostsActivity : BaseActivity() {
+class PostListActivity : BaseActivity() {
 
     @Inject
     lateinit var repository: AppRepository
 
-    private val view by lazy {
-        LayoutInflater.from(this).inflate(R.layout.activity_posts, null, false)
-    }
-    private val viewModel: PostsViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory { PostsViewModel(repository) }).get(PostsViewModel::class.java)
+    private val viewModel: PostListViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory { PostListViewModel(repository) }).get(PostListViewModel::class.java)
     }
 
     private val injector by lazy {
@@ -46,19 +40,19 @@ class PostsActivity : BaseActivity() {
             .build()
     }
 
-    private val recyclerAdapter by lazy { PostsAdapter() }
+    private val recyclerAdapter by lazy { PostListAdapter() }
 
     private var currentSort = Sort.HOT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(view)
+        setContentView(R.layout.activity_posts)
 
         injector.inject(this)
 
         with(posts_recyclerview) {
-            layoutManager = LinearLayoutManager(this@PostsActivity)
-            addItemDecoration(DividerItemDecoration(this@PostsActivity, DividerItemDecoration.VERTICAL))
+            layoutManager = LinearLayoutManager(this@PostListActivity)
+            addItemDecoration(DividerItemDecoration(this@PostListActivity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
         }
 

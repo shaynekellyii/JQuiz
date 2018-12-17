@@ -1,7 +1,7 @@
 package com.shaynek.jquiz.injection
 
 import com.shaynek.jquiz.pref.Preferences
-import com.shaynek.jquiz.view.PostsActivity
+import com.shaynek.jquiz.view.PostListActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
 
-    fun inject(activity: PostsActivity)
+    fun inject(activity: PostListActivity)
     fun inject(preferences: Preferences)
 
     @Component.Builder
