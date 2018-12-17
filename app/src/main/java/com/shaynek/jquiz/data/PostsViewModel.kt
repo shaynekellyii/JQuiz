@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.shaynek.jquiz.enums.Sort
 import com.shaynek.jquiz.model.RedditPostData
 import com.shaynek.jquiz.model.RedditResponse
+import com.shaynek.jquiz.pref.Preferences
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -21,9 +22,8 @@ class PostsViewModel(private val repository: AppRepository) : ViewModel() {
 
     init {
         dataStatus.postValue(DataStatus.LOADING)
-        // TODO: Change this to the last sort used instead of default Best
         disposable.add(
-            repository.fetchPosts(Sort.BEST)
+            repository.fetchPosts(Preferences.getLastSort())
                 .subscribe(this::onCluesFetched, this::onCluesFetchError))
     }
 
@@ -37,6 +37,7 @@ class PostsViewModel(private val repository: AppRepository) : ViewModel() {
 
     fun onSortSelected(sort: Sort?) {
         sort?.let {
+            Preferences.setLastSort(it)
             dataStatus.postValue(DataStatus.LOADING)
             repository.fetchPosts(it)
                 .subscribe(this::onCluesFetched, this::onCluesFetchError)

@@ -1,6 +1,7 @@
 package com.shaynek.jquiz.injection
 
 import android.content.Context
+import android.preference.PreferenceManager
 import com.shaynek.jquiz.data.AppRepository
 import com.shaynek.jquiz.network.RedditApi
 import com.shaynek.jquiz.util.API_BASE_URL
@@ -31,4 +32,8 @@ class AppModule(private val app: Context) {
     @Provides
     @Reusable
     internal fun provideRepository(redditApi: RedditApi): AppRepository = AppRepository(redditApi)
+
+    @Provides
+    @Reusable
+    internal fun provideSharedPreferences() = PreferenceManager.getDefaultSharedPreferences(app)
 }
