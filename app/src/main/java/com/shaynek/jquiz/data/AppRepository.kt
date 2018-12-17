@@ -9,10 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class AppRepository : BaseRepository() {
-
-    @Inject
-    lateinit var redditApi: RedditApi
+class AppRepository(private val redditApi: RedditApi) {
 
     /**
      * Fetches top posts from the reddit API and returns an observable.

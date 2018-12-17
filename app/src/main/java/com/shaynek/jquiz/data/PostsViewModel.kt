@@ -1,6 +1,7 @@
 package com.shaynek.jquiz.data
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.shaynek.jquiz.enums.Sort
 import com.shaynek.jquiz.model.RedditPostData
 import com.shaynek.jquiz.model.RedditResponse
@@ -11,10 +12,7 @@ import javax.inject.Inject
  * Observable ViewModel for displaying the list of posts.
  * @constructor Initializes the data status and fetches data from the repository.
  */
-class PostsViewModel : BaseViewModel() {
-
-    @Inject
-    lateinit var repository: AppRepository
+class PostsViewModel(private val repository: AppRepository) : ViewModel() {
 
     val posts: MutableLiveData<List<RedditPostData>> = MutableLiveData()
     val dataStatus: MutableLiveData<DataStatus> = MutableLiveData()

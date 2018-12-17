@@ -1,8 +1,6 @@
-package com.shaynek.jquiz
+package com.shaynek.jquiz.view
 
-import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -12,30 +10,42 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.ListPreloader.PreloadModelProvider
-import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
+import com.shaynek.jquiz.R
+import com.shaynek.jquiz.data.AppRepository
 import com.shaynek.jquiz.data.DataStatus
 import com.shaynek.jquiz.data.PostsViewModel
 import com.shaynek.jquiz.enums.Sort
+import com.shaynek.jquiz.injection.AppComponent
+import com.shaynek.jquiz.injection.AppModule
+import com.shaynek.jquiz.injection.DaggerAppComponent
 import com.shaynek.jquiz.injection.GlideApp
 import com.shaynek.jquiz.model.RedditPostData
 import com.shaynek.jquiz.network.GlidePreloadModelProvider
 import com.shaynek.jquiz.util.MAX_PRELOAD_IMAGES
-import com.shaynek.jquiz.view.PostsAdapter
 import kotlinx.android.synthetic.main.activity_posts.*
-import java.util.*
+import javax.inject.Inject
 
+class PostsActivity : BaseActivity() {
 
-class PostsActivity : AppCompatActivity() {
+    @Inject
+    lateinit var repository: AppRepository
 
     private val view by lazy {
         LayoutInflater.from(this).inflate(R.layout.activity_posts, null, false)
     }
     private val viewModel: PostsViewModel by lazy {
-        ViewModelProviders.of(this).get(PostsViewModel::class.java)
+        ViewModelProviders.of(this, viewModelFactory { PostsViewModel(repository) }).get(PostsViewModel::class.java)
     }
+
+    private val injector by lazy {
+        DaggerAppComponent
+            .builder()
+            .appModule(AppModule(applicationContext))
+            .build()
+    }
+
     private val recyclerAdapter by lazy { PostsAdapter() }
 
     private var currentSort = Sort.HOT
@@ -43,6 +53,8 @@ class PostsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(view)
+
+        injector.inject(this)
 
         with(posts_recyclerview) {
             layoutManager = LinearLayoutManager(this@PostsActivity)
